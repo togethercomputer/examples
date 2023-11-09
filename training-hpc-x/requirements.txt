@@ -1,0 +1,19 @@
+accelerate==0.23.0
+awscli==1.29.57
+boto3==1.28.57
+cchardet==2.1.7
+chardet==5.2.0
+datasets==2.14.5
+einops==0.6.1
+lightning==2.1.0
+netifaces==0.11.0
+ninja==1.11.1
+packaging==23.2
+peft==0.5.0
+pytest==7.4.2
+pyyaml==6.0.1
+sentencepiece==0.1.99
+tqdm==4.66.1
+transformers==4.34.1
+wandb==0.15.11
+flash_attn @ git+https://github.com/Dao-AILab/flash-attention.git@v2.0.4
