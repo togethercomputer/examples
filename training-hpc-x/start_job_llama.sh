@@ -23,12 +23,6 @@ export MASTER_PORT=7010
 
 export GPUS_PER_NODE=8
 
-# # Make sure we are on the right directory
-# cd $HOME/2023-may-intro-to-supercompting-jsc/src
-
-# # This loads modules and python packages
-# source sc_venv_template/activate.sh
-
 # Set up accelerate config.
 export ACCELERATE_CONFIG_YAML=accelerate_config.yaml
 
@@ -56,7 +50,7 @@ EOT"
 echo "ACCELERATE CONFIG:"
 cat $ACCELERATE_CONFIG_YAML
 
-# Run the demo
+# Run the demo.
 srun bash -c 'apptainer run \
   --nv \
   --bind $ACCELERATE_CONFIG_YAML:/mnt/config.yaml \
