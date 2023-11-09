@@ -13,9 +13,11 @@ export SRUN_CPUS_PER_TASK="$SLURM_CPUS_PER_TASK"
 # so processes know who to talk to
 MASTER_ADDR="$(scontrol show hostnames "$SLURM_JOB_NODELIST" | head -n 1)"
 # Allow communication over InfiniBand cells.
-MASTER_ADDR="${MASTER_ADDR}i"
+# MASTER_ADDR="${MASTER_ADDR}i"
+echo "MASTER ADDR: $MASTER_ADDR"
 # Get IP for hostname.
 export MASTER_ADDR="$(nslookup "$MASTER_ADDR" | grep -oP '(?<=Address: ).*')"
+echo "MASTER ADDR (IP): $MASTER_ADDR"
 
 export MASTER_PORT=7010
 
@@ -41,7 +43,6 @@ fsdp_config:
   fsdp_sharding_strategy: 1
   fsdp_state_dict_type: FULL_STATE_DICT
   fsdp_transformer_layer_cls_to_wrap: LlamaDecoderLayer
-machine_rank: \$SLURM_NODEID
 main_process_ip: '\$MASTER_ADDR'
 main_process_port: \$MASTER_PORT
 main_training_function: main
@@ -56,9 +57,12 @@ echo "ACCELERATE CONFIG:"
 cat $ACCELERATE_CONFIG_YAML
 
 # Run the demo
-time srun apptainer run \
-    --nv \
-    --bind $ACCELERATE_CONFIG_YAML:/mnt/config.yaml \
-    $APPTAINER_IMAGE 'accelerate launch \
-    --config_file=/mnt/config.yaml \
-    /app/train.py'
+srun bash -c 'apptainer run \
+  --nv \
+  --bind $ACCELERATE_CONFIG_YAML:/mnt/config.yaml \
+  --bind /etc/nccl.conf:/etc/nccl.conf \
+  --bind /etc/crusoe:/etc/crusoe \
+  $APPTAINER_IMAGE accelerate launch \
+  --machine_rank=$SLURM_NODEID \
+  --config_file=/mnt/config.yaml \
+  /app/train.py --batch-size 1'
