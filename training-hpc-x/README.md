@@ -8,7 +8,7 @@ A generic build of PyTorch is not guaranteed to work with every IB fabric. NVIDI
 
 You can build a Singularity Image Format file from the DockerHub repository to run the image with Apptainer (make sure to specify `APPTAINER_IMAGE`)
 ```console
-apptainer build $APPTAINER_IMAGE docker://togethercomputer/infiniband_training_example:latest
+apptainer build $APPTAINER_IMAGE docker://azahed98/infiniband_training_example:latest
 ```
 
 ## Testing NCCL
