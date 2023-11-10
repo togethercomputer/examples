@@ -26,11 +26,6 @@ dtype = torch.float32
 rank, n_ranks = init_workers_nccl_file()
 local_rank = rank % ranks_per_node
 
-# Allocate a small tensor on every gpu from every rank.
-# This is an attempt to force creation of all device contexts.
-#for i in range(ranks_per_node):
-#    _ = torch.randn(1).to(torch.device('cuda', i))
-
 # Select our gpu
 device = torch.device('cuda', local_rank)
 print('Rank', rank, 'size', n_ranks, 'device', device, 'count', torch.cuda.device_count())

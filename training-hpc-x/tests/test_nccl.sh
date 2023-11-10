@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --nodes 2
-#SBATCH --ntasks-per-node=8
-#SBATCH --gpus-per-task=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --gpus-per-task=8
 #SBATCH --exclusive
 #SBATCH -o slurm-nccl-%j.out
 
@@ -54,4 +54,4 @@ srun apptainer run \
     --bind /etc/nccl.conf:/etc/nccl.conf \
     --bind /etc/crusoe:/etc/crusoe \
     --env SCRATCH=/scratch \
-    $APPTAINER_IMAGE python3 /mnt/tests/test_nccl.py
+    $APPTAINER_IMAGE python3 /app/tests/test_nccl.py
