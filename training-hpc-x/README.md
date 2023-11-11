@@ -11,20 +11,26 @@ You can build a Singularity Image Format file from the DockerHub repository to r
 apptainer build $APPTAINER_IMAGE docker://azahed98/infiniband_training_example:latest
 ```
 
+For this example, you will also need a dedicated shared directory for the scripts to write to. Please set the required environment variables
+```console
+export WORK_DIR=...
+export APPTAINER_IMAGE=...
+```
+
 ## Testing NCCL
 
 Before training, let's make sure PyTorch is able to use NCCL with RDMA. First, enable NCCL debug logging
 ```console
 export NCCL_DEBUG=INFO
 ```
+
 When launching any command with a container, it is **IMPORTANT** we include the appropriate NCCL configs, plugins and topology information. You can do this by adding the following bind to any `apptainer run` command. We take care of this for you in the bash scripts of this example.
 ```console
     --bind /etc/nccl.conf:/etc/nccl.conf
     --bind /etc/crusoe:/etc/crusoe 
 ```
 
-
-Now we can test NCCL to make sure it's using RDMA interfaces and not RoCE. Torch Distributed will require a file in a shared directory to initialize communications for this test, which we specify with `WORK_DIR`. Simply run our test script with `NCCL_DEBUG=INFO` and inspect the logs. This will use two nodes and test communication between one gpu on each node.
+Now we can test NCCL to make sure PyTorch is using Infiniband RDMA interfaces and not RoCE or regular TCP/IP. Torch Distributed will require a file in a shared directory to initialize communications for this test, which we specify with `WORK_DIR`. Simply run our test script with `NCCL_DEBUG=INFO` and inspect the logs. This will use two nodes and test communication between one gpu on each node.
 
 ```console
 sbatch tests/test_nccl.sh --work-dir $WORK_DIR --image $APPTAINER_IMAGE 
