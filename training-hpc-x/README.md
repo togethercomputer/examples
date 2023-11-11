@@ -1,6 +1,6 @@
 # Training with Infiniband (IB)
 
-This example will walk through a sample of fine-tuning Llama-2-7b with an Infiniband multi-node slurm configuration on your Together Forge cluster. In our case we will use HuggingFace Accelerate with Fully Sharded Data Parallelism and Flash Attention V2.
+This example will walk through a sample of fine-tuning Llama-2-7b with an Infiniband multi-node slurm configuration on your Together GPU cluster. In our case we will use HuggingFace Accelerate with Fully Sharded Data Parallelism and Flash Attention V2.
 
 ## Setting Up the Container
 
