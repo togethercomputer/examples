@@ -17,7 +17,7 @@ export WORK_DIR=...
 export APPTAINER_IMAGE=...
 ```
 
-## Testing NCCL
+## Testing PyTorch with NCCL
 
 Before training, let's make sure PyTorch is able to use NCCL with RDMA. First, enable NCCL debug logging
 ```console
