@@ -60,8 +60,7 @@ sbatch start_job_llama.sh \
     --image $APPTAINER_IMAGE \
     --train-options \
         "--batch-size 1 \
-        --use-flash-attn \
-        --train-file /work/jokes.jsonl"
+        --use-flash-attn"
 ```
 
 If using `NCCL_DEBUG=INFO`, you should be able to validate that Infiniband is being used as before. A shared filesystem is not required for this script. You will need access to the [Llama-2 HuggingFace Repository](https://huggingface.co/meta-llama/Llama-2-7b-hf) to immediately begin training. You can also use another model or dataset (just disable Flash Attention and modify max-length if not supported). The options below can be specified in a string passed `-train-options`.
