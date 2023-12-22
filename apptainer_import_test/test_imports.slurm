@@ -116,7 +116,7 @@ else
     exit 1
 fi
 
-export CMD="$CONTAINER_CMD pip install $LAUNCHER_CMD"
+export CMD="$CONTAINER_CMD $LAUNCHER_CMD"
 
 echo "STARTING TEST WITH CMD ${CMD}"
 
