@@ -1,0 +1,15 @@
+git+https://github.com/huggingface/transformers@ebfdb9ca62205279d5019ef1403877461b3b2da4
+git+https://github.com/huggingface/accelerate@eafcea07f639a5476385854ea9bccdbba467db9d
+git+https://github.com/huggingface/peft@e73967edea0b337fb11fdde3da5b9823512f8f68
+datasets==2.15.0
+huggingface-hub==0.19.4
+multidict==6.0.4
+multiprocess==0.70.15
+networkx==3.0rc1
+ninja==1.11.1.1
+numpy==1.24.1
+safetensors==0.4.1
+scikit-learn==1.3.2
+scipy==1.10.1
+sentencepiece==0.1.99
+tokenizers==0.15.0
