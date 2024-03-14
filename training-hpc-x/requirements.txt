@@ -14,6 +14,6 @@ pytest==7.4.2
 pyyaml==6.0.1
 sentencepiece==0.1.99
 tqdm==4.66.1
-transformers==4.34.1
+transformers==4.36.0
 wandb==0.15.11
 flash_attn @ git+https://github.com/Dao-AILab/flash-attention.git@v2.0.4
